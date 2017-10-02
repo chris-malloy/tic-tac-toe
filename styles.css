@@ -1,0 +1,50 @@
+body {
+    height: 100vh;
+}
+
+h1 {
+    color: blue;
+    font-size: 60px;
+}
+
+#message {
+    font-size: 40px;
+    min-height: 80px;
+}
+
+#message2 {
+    font-size: 40px;
+    min-height: 80px;
+    margin-top: 30px;
+}
+
+#board {
+    max-width: 640px;
+    min-width: 320px;
+    /* Override bootstrap */
+    float: none;
+    margin: auto;
+}
+
+#button {
+    font-size: 30px;
+    border-radius: 15px;
+}
+
+.square {
+    background-color: #fff;
+    border: 2px solid #000;
+    outline: none;
+    width: 185px;
+    height: 185px;
+    font-size: 60px;
+}
+
+.square:hover {
+    background-color: lightblue;
+}
+
+.winning-square {
+    background-color: navy;
+    color: plum;
+}
