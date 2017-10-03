@@ -1,8 +1,17 @@
 // GOBALS
 var squares = document.getElementsByClassName('square');
+var message = document.getElementById('message').innerHTML = "Welcome to the game!"
+var message2 = document.getElementById('message2').innerHTML = "";
+var button = document.getElementById('button').innerHTML = "Reset"
 var whosTurn = 1;
 var player1Squares = [];
 var player2Squares = [];
+// used to check for tie
+var playerSquares = [];
+var player1img = "<img src="
+">";
+var player2img = "<img src="
+">";
 var winningCombos = [
     ['A1', 'B1', 'C1'],
     ['A2', 'B2', 'C2'],
@@ -14,33 +23,47 @@ var winningCombos = [
     ['A3', 'B2', 'C1']
 ];
 var gameOver = false;
+var scores = [
+    0,
+    0
+];
 
-// CLICK TO ADD TO ARRAY
-for (let i = 0; i < squares.length; i++) {
-    squares[i].addEventListener('click', function(event) {
-        if (!gameOver) {
-            markSquare(this);
-        } else {
-            document.getElementById('message2').innerHTMl = "Would you like to play again?"
+// HOW MANY PLAYERS?
+var numPlayers = prompt('How many players? (1 or 2)')
+
+// computer turn function
+function computerTurn() {
+    var squareFound = false;
+    while (!squareFound) {
+        rand = Math.floor(Math.random() * 9);
+        var isTaken = squares[rand].innerHTML;
+        if (isTaken === '-') {
+            squareFound = true;
         }
-    });
+    }
+    markSquare(squares[rand])
 }
 
 // SQUARE CLICKED FUNCTION
 function markSquare(squareClicked) {
     if (squareClicked.innerHTML !== '-') {
         document.getElementById('message').innerHTML = "Sorry that square is taken.";
-    } else if (whosTurn === 1) {
+    } else if ((whosTurn === 1)) {
         whosTurn = 2;
         squareClicked.innerHTML = 'X';
         player1Squares.push(squareClicked.id);
+        playerSquares.push(squareClicked.id);
         document.getElementById('message').innerHTML = "It's Player 2's turn.";
         checkWin(player1Squares, 1);
         console.log(player1Squares)
-    } else {
+        if ((numPlayers == 1) && (!gameOver)) {
+            computerTurn();
+        }
+    } else if ((whosTurn === 2)) {
         squareClicked.innerHTML = 'O';
         whosTurn = 1;
         player2Squares.push(squareClicked.id);
+        playerSquares.push(squareClicked.id);
         document.getElementById('message').innerHTML = "It's Player 1's turn.";
         checkWin(player2Squares, 2);
         console.log(player2Squares)
@@ -49,17 +72,21 @@ function markSquare(squareClicked) {
 
 // RESET FUNCTION
 document.getElementById('button').onclick = function() {
-    console.log('reset pressed')
-    var squares = document.getElementsByClassName('square');
-    var whosTurn = 1;
-    return whosTurn;
-    var player1Squares = [];
-    var player2Squares = undefined;
-    var gameOver = false;
-    document.getElementsByClassName('square').innerHTML = '-';
-    console.log(board.getElementsByClassName('square').innerHTML)
+    message = document.getElementById('message').innerHTML = "Welcome to the game!"
+    button = document.getElementById('button').innerHTML = "Reset"
+    message2 = document.getElementById('message2').innerHTML = "";
+    whosTurn = 1;
+    player1Squares = [];
+    player2Squares = [];
+    gameOver = false;
+    numberOfPlayers = prompt("How many this time?")
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].innerHTML = '-';
+    }
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].classList.remove('winning-square');
+    }
 }
-
 
 // WIN FUNCTION
 function checkWin(currentPlayerSquares, whoJustMarked) {
@@ -75,10 +102,16 @@ function checkWin(currentPlayerSquares, whoJustMarked) {
                 squareCount++;
             }
         }
-        if (squareCount === 3) {
+        if ((squareCount === 3) && (playerSquares.length < 9)) {
             endGame(winningCombos[i], whoJustMarked);
             break;
         }
+    }
+    if (playerSquares.length == 9) {
+        console.log('we have a tie')
+        document.getElementById('message').innerHTML = "Looks like it's a Tie!"
+        document.getElementById('message2').innerHTML = "Try again?"
+        document.getElementById('button').innerHTML = "Play again!"
     }
 }
 
@@ -93,3 +126,19 @@ function endGame(winningCombo, whoJustMarked) {
         document.getElementById(winningCombo[i]).className += ' winning-square';
     }
 }
+
+// CLICK TO ADD TO ARRAY
+for (let i = 0; i < squares.length; i++) {
+    squares[i].addEventListener('click', function(event) {
+        if (!gameOver) {
+            markSquare(this);
+        } else {
+            message2 = "Would you like to play again?"
+        }
+    });
+}
+
+
+
+// TODO - fix the player score
+// Allow for tie condition

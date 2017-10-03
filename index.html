@@ -21,14 +21,15 @@
         <div class="row">
             <div id="message" class="col-sm-12">
                 <!-- Messages for the user will go inside this div -->
-                Let's play!
             </div>
-
-            <div id="board" class="col-sm-12">
+            <div class="score col-sm-2">
+                Player One's score: <span id="player-one-score">0</span>
+            </div>
+            <div id=" board " class="col-sm-8 ">
                 <!-- All 3 rows will have 3 buttons. -->
-                <!-- Each row will be called a "board-row" -->
+                <!-- Each row will be called a "board-row " -->
                 <!-- Each butto, wil have a uniqe id for that button -->
-                <!-- Each button will have a class of "square" -->
+                <!-- Each button will have a class of "square " -->
                 <div class="board-row">
                     <button id="A1" class="square">-</button>
                     <button id="B1" class="square">-</button>
@@ -39,17 +40,20 @@
                     <button id="B2" class="square">-</button>
                     <button id="C2" class="square">-</button>
                 </div>
-                <div class="board-row">
+                <div class="board-row ">
                     <button id="A3" class="square">-</button>
                     <button id="B3" class="square">-</button>
                     <button id="C3" class="square">-</button>
                 </div>
             </div>
-            <div id="message2"></div>
-            <button type="reset" value="Reset" id="button" class="btn btn-primary">Reset</button>
+            <div class="score col-sm-2">
+                Player 2 Score: <span id="player-two-score">0</span>
+            </div>
         </div>
+        <div id="message2"></div>
+        <button type="reset" value="Reset" id="button" class="btn btn-primary">Reset</button>
     </div>
-    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="scripts.js "></script>
 
 </body>
 

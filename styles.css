@@ -48,3 +48,7 @@ h1 {
     background-color: navy;
     color: plum;
 }
+
+.score {
+    height: 100%;
+}

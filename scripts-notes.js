@@ -63,12 +63,14 @@ function markSquare(squareClicked) {
         document.getElementById('message').innerHTML = "Sorry that square is taken.";
     } else if (whosTurn === 1) {
         whosTurn = 2;
-        squareClicked.innerHTML = 'X';
+        // squareClicked.innerHTML = 'X';
+        squareClicked.src = ("dragon.png")
         player1Squares.push(squareClicked.id);
         document.getElementById('message').innerHTML = "It's Player 2's turn.";
         checkWin(player1Squares, 1);
     } else {
-        squareClicked.innerHTML = 'O';
+        // squareClicked.innerHTML = 'O';
+        squareClicked.src = ("dragon.png")
         whosTurn = 1;
         player2Squares.push(squareClicked.id);
         document.getElementById('message').innerHTML = "It's Player 1's turn.";
